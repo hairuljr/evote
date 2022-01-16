@@ -33,34 +33,11 @@
                         <!-- Mashead text and app badges-->
                         <div class="mb-5 mb-lg-0 text-center text-lg-start">
                             <h1 class="display-1 lh-1 mb-3">Ayo, berikan dukungamu</h1>
-                            <p class="lead fw-normal text-muted mb-5">Scan QR Code berikut untuk memberikan voting pada karya yang kamu suka agar menjadi pemenangnya!</p>
+                            <p class="lead fw-normal text-muted mb-5">Scan QR Code dikartu anda untuk memberikan voting pada karya yang anda sukai agar menjadi pemenangnya!</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <!-- Masthead device mockup feature-->
-                        <div class="masthead-device-mockup">
-                            <svg class="circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="circleGradient" gradientTransform="rotate(45)">
-                                        <stop class="gradient-start-color" offset="0%"></stop>
-                                        <stop class="gradient-end-color" offset="100%"></stop>
-                                    </linearGradient>
-                                </defs>
-                                <circle cx="50" cy="50" r="50"></circle></svg
-                            ><svg class="shape-1 d-none d-sm-block" viewBox="0 0 240.83 240.83" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="-32.54" y="78.39" width="305.92" height="84.05" rx="42.03" transform="translate(120.42 -49.88) rotate(45)"></rect>
-                                <rect x="-32.54" y="78.39" width="305.92" height="84.05" rx="42.03" transform="translate(-49.88 120.42) rotate(-45)"></rect></svg
-                            ><svg class="shape-2 d-none d-sm-block" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"></circle></svg>
-                            <div class="device-wrapper">
-                                <div class="device" data-device="iPhoneX" data-orientation="portrait" data-color="black">
-                                    <div class="screen bg-black">
-                                        <div class="qrcode">
-                                            {!! QrCode::eye('circle')->size(220)->gradient(0,204,102,51,153,255, 'inverse_diagonal')->generate(route('connect')) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div style="width: 500px" id="reader"></div>
                     </div>
                 </div>
             </div>
@@ -78,6 +55,24 @@
         <!-- Core theme JS-->
         <script src="{{ asset('template/js/scripts.js') }}"></script>
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-        <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
+        @if (!session('nim'))            
+        <script>
+            function onScanSuccess(decodedText, decodedResult) {
+                // Handle on success condition with the decoded text or result.
+                // console.log(`Scan result: ${decodedText}`, decodedResult);
+                window.location.href = `{{ url('/connect/${decodedText}') }}`
+
+                html5QrcodeScanner.clear();
+            }
+
+            function onScanError(errorMessage) {
+            alert('Scan QR Code gagal. silakan refresh halaman untuk mengulangi scanning')
+            }
+
+            var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", { fps: 10, qrbox: 250 });
+            html5QrcodeScanner.render(onScanSuccess);
+        </script>
+        @endif
     </body>
 </html>

@@ -1,3 +1,7 @@
+.masthead {
+    padding-bottom: 9.5rem !important;
+}
+
 .screen {
     background-color: #fff !important;
 }
@@ -96,6 +100,10 @@
 }
 
 @media only screen and (max-width: 540px) {
+    .masthead {
+        padding-bottom: 5.5rem !important;
+    }
+
     .qrcode {
         top: 32%;
         left: 6%;
@@ -106,10 +114,10 @@
         height: 120px !important;
     }
 
-    /* .container {
-        padding-left: 0px !important;
-        padding-right: 0px !important; */
-    /* } */
+    #reader {
+        width: 300px !important;
+        margin-bottom: 20px !important;
+    }
 
     .card {
         width: 400px;

@@ -29,18 +29,14 @@
                   <span class="mobile-text">Masukkan 6 digit NIM anda ex: <b class="text-danger">199901 </b>
                   </span>
                   <div class="d-flex flex-row mt-5 input-lg">
-                    <input name="digit_1" type="text" class="form-control" autofocus="">
-                    <input name="digit_2" type="text" class="form-control" required>
-                    <input name="digit_3" type="text" class="form-control" required>
-                    <input name="digit_4" type="text" class="form-control" required>
-                    <input name="digit_5" type="text" class="form-control" required>
-                    <input name="digit_6" type="text" class="form-control" required>
-                    <input name="digit_7" type="text" class="form-control" required>
-                    <input name="digit_8" type="text" class="form-control" required>
-                    <input name="digit_9" type="text" class="form-control" required>
-                    <input name="digit_10" type="text" class="form-control" required>
+                    @foreach ($digits as $key => $item)
+                    @php
+                        $no = (int)$key+1;
+                    @endphp
+                    <input name="{{ 'digit_'.$no }}" value="{{ $item }}" type="text" class="form-control" autofocus="">
+                    @endforeach
                   </div>
-                  <input name="all_digit" type="text" class="form-control d-md-none" placeholder="Masukkan NIM disini" required>
+                  <input name="all_digit" type="text" value="{{ $number }}" class="form-control d-md-none" placeholder="Masukkan NIM disini" required>
                   @if ($errors->any())
                     @foreach ($errors->all() as $error)
                       <div class="mt-2 p-2 alert alert-warning alert-dismissible fade show" role="alert">{{ $error }}

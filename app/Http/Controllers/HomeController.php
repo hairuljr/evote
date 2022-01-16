@@ -9,12 +9,18 @@ class HomeController extends Controller
 {
     public function index()
     {
+        if (session('nim')) {
+            return redirect()->route('vote');
+        }
         return view('welcome');
     }
 
-    public function connect()
+    public function connect($nim)
     {
-        return view('login');
+        $scanned = explode('.', $nim);
+        $number = implode('', $scanned);
+        $digits = str_split($number);
+        return view('login', compact('digits', 'number'));
     }
 
     public function vote()
@@ -24,12 +30,7 @@ class HomeController extends Controller
 
     public function login(NIMValidationRequest $request)
     {
-        $digits = $request->except('_token');
-        $nim = [];
-        foreach ($digits as $value) {
-            array_push($nim, $value);
-        }
-        session(['nim' => implode('', $nim)]);
+        session(['nim' => $request->all_digit]);
         return redirect()->route('vote');
     }
 }
