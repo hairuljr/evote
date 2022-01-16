@@ -6,6 +6,7 @@ use Hexters\Ladmin\Routes\Ladmin;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
 Route::get('/connect/{nim}', [App\Http\Controllers\HomeController::class, 'connect'])->name('connect');
 Route::get('/vote', [App\Http\Controllers\HomeController::class, 'vote'])->name('vote');
+Route::get('/detail', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
 Route::post('/login-qr', [App\Http\Controllers\HomeController::class, 'login'])->name('login-qr');
 
 

@@ -48,9 +48,9 @@
           <div class="entry__text">
             <div class="entry__header">
               <div class="entry__date">
-                <a href="single-gallery.html">December 10, 2017</a>
+                <a href="{{ route('detail') }}">December 10, 2017</a>
               </div>
-              <h1 class="entry__title"><a href="single-gallery.html">Workspace Design Trends and Ideas.</a></h1>
+              <h1 class="entry__title"><a href="{{ route('detail') }}">Workspace Design Trends and Ideas.</a></h1>
             </div>
             <div class="entry__excerpt">
               <p>
@@ -60,8 +60,7 @@
             </div>
             <div class="entry__meta">
               <span class="entry__meta-links">
-                <a href="category.html">Work</a>
-                <a href="category.html">Management</a>
+                <a href="{{ route('detail') }}">Lihat Selengkapnya</a>
               </span>
             </div>
           </div>

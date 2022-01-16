@@ -28,6 +28,11 @@ class HomeController extends Controller
         return view('vote');
     }
 
+    public function detail()
+    {
+        return view('detail-karya');
+    }
+
     public function login(NIMValidationRequest $request)
     {
         session(['nim' => $request->all_digit]);
