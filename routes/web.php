@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administrator\{CreationController};
 use Illuminate\Support\Facades\Route;
 use Hexters\Ladmin\Routes\Ladmin;
 
@@ -13,6 +14,7 @@ Route::post('/login-qr', [App\Http\Controllers\HomeController::class, 'login'])-
 // LADMIN
 Ladmin::route(function () {
 
-  Route::resource('/withdrawal', WithdrawalController::class); // Example
-
+  Route::group(['as' => 'data.', 'prefix' => 'data'], function () {
+    Route::resource('/creation', CreationController::class);
+  });
 });

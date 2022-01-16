@@ -111,6 +111,68 @@ return [
     ]
   ],
 
+  // Creation
+  [
+    'gate' => 'administrator.data',
+    'name' => 'Data',
+    'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+    'route' => null,
+    'isActive' => null,
+    'icon' => 'cube',
+    'id' => '',
+    'gates' => [],
+    'submenus' => [
+
+      [
+        'gate' => 'administrator.data.creation.index',
+        'name' => 'Creation',
+        'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+        'route' => ['administrator.data.creation.index', []],
+        'isActive' => 'data/creation*',
+        'id' => '',
+        'gates' => [
+          [
+            'gate' => 'administrator.data.creation.create',
+            'title' => 'Create Creation',
+            'description' => 'User can create new creation'
+          ],
+          [
+            'gate' => 'administrator.data.creation.update',
+            'title' => 'Update Creation',
+            'description' => 'User can update creation'
+          ],
+          [
+            'gate' => 'administrator.data.creation.destroy',
+            'title' => 'Delete Creation',
+            'description' => 'User can delete creation'
+          ]
+        ],
+      ],
+
+      // [
+      //   'gate' => 'administrator.access.permission.index',
+      //   'name' => 'Permission',
+      //   'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+      //   'route' => ['administrator.access.permission.index', []],
+      //   'isActive' => 'access/permission*',
+      //   'id' => '',
+      //   'gates' => [
+      //     [
+      //       'gate' => 'administrator.access.permission.show',
+      //       'title' => 'Views detail Permission',
+      //       'description' => 'User can view detail for all permission'
+      //     ],
+      //     [
+      //       'gate' => 'administrator.access.permission.assign',
+      //       'title' => 'Assign Permission',
+      //       'description' => 'User can assign for all permission'
+      //     ],
+
+      //   ],
+      // ]
+    ]
+  ],
+
   [
     'gate' => 'administrator.system',
     'name' => 'System',

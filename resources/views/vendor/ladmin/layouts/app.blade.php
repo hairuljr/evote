@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ asset('/css/ladmin/app.css') }}">
   
   {!! $styles ?? null !!}
+  @stack('style')
 
 </head>
 <body>
