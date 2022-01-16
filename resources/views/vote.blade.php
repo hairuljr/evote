@@ -9,9 +9,9 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <link rel="stylesheet" href="{{ asset('frontend/css/base.css%2bvendor.css%2bmain.css.pagespeed.cc.9fgRYB3Ugn.css') }}" />
+  <link rel="stylesheet" href="{{ asset('frontend/css/base.css') }}" />
 
-  <script src="{{ asset('frontend/js/modernizr.js%2bpace.min.js.pagespeed.jc.3cjs7RKjPU.js') }}"></script>
+  <script src="{{ asset('frontend/js/modernizr.js') }}"></script>
   <script>eval(mod_pagespeed_F_5s4xpU58);</script>
   <script>eval(mod_pagespeed_6uAVvYLEkz);</script>
 

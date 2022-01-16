@@ -66,7 +66,7 @@
             }
 
             function onScanError(errorMessage) {
-            alert('Scan QR Code gagal. silakan refresh halaman untuk mengulangi scanning')
+                alert('Scan QR Code gagal. silakan refresh halaman untuk mengulangi scanning')
             }
 
             var html5QrcodeScanner = new Html5QrcodeScanner(
