@@ -25,28 +25,19 @@
               <div class="card py-5 px-3">
                 <form action="{{ route('login-qr') }}" method="post">
                   @csrf
-                  <h5 class="m-0">Login menggunakan NIM</h5>
-                  <span class="mobile-text">Masukkan 6 digit NIM anda ex: <b class="text-danger">199901 </b>
+                  <h4 class="m-0">Login menggunakan NIM</h4>
+                  <span class="mobile-text">Masukkan 10 digit NIM anda ex: <b class="text-danger fst-italic">2919990102 </b>
                   </span>
-                  <div class="d-flex flex-row mt-5 input-lg">
-                    @foreach ($digits as $key => $item)
-                    @php
-                        $no = (int)$key+1;
-                    @endphp
-                    <input name="{{ 'digit_'.$no }}" value="{{ $item }}" type="text" class="form-control" autofocus="">
-                    @endforeach
+                  <div class="d-flex flex-row mt-5">
+                    <input maxlength="10" name="digit" type="text" value="{{ old('digit', $number) }}" class="form-control" placeholder="Masukkan NIM disini" required autocomplete="off">
                   </div>
-                  <input name="all_digit" type="text" value="{{ $number }}" class="form-control d-md-none" placeholder="Masukkan NIM disini" required>
-                  @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                      <div class="mt-2 p-2 alert alert-warning alert-dismissible fade show" role="alert">{{ $error }}
+                  @if (session('error'))
+                      <div class="mt-2 p-2 alert alert-warning alert-dismissible fade show" role="alert">{{ session('error') }}
                         <button type="button" class="p-3 btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
-                    @endforeach
                   @endif
                   <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary">MASUK</button>
-                    <span class="d-block mobile-text mt-3">*Anda hanya bisa melakukan satu kali Vote.</span>
                   </div>
                 </form>
               </div>
@@ -55,7 +46,15 @@
         </section>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <!-- Core theme JS-->
         <script src="{{ asset('template/js/scripts.js') }}"></script>
+        <script>
+          $(function() {
+              $("input[name='digit']").on('input', function(e) {
+                  $(this).val($(this).val().replace(/[^0-9]/g, ''));
+              });
+          });
+      </script>
     </body>
 </html>

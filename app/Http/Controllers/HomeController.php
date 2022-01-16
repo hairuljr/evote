@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NIMValidationRequest;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -19,8 +19,7 @@ class HomeController extends Controller
     {
         $scanned = explode('.', $nim);
         $number = implode('', $scanned);
-        $digits = str_split($number);
-        return view('login', compact('digits', 'number'));
+        return view('login', compact('number'));
     }
 
     public function vote()
@@ -35,7 +34,11 @@ class HomeController extends Controller
 
     public function login(NIMValidationRequest $request)
     {
-        session(['nim' => $request->all_digit]);
+        $user = User::whereNim($request->digit)->first();
+        if (!$user) {
+            return back()->with(['error' => 'NIM Anda salah'])->withInput();
+        }
+        session(['nim' => $user->nim]);
         return redirect()->route('vote');
     }
 }

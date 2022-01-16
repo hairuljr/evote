@@ -13,7 +13,7 @@
 }
 
 .card {
-    width: 800px;
+    width: 400px;
     padding: 10px;
     border-radius: 20px;
     background: #fff;
@@ -33,7 +33,6 @@
 .mobile-text {
     color: #989696b8;
     font-size: 15px;
-    font-style: italic;
 }
 
 .form-control {
@@ -75,6 +74,12 @@
     font-size: 14px;
     color: #989696;
     opacity: 0.6;
+}
+
+input {
+    text-align: center;
+    font-weight: 700 !important;
+    letter-spacing: 2px;
 }
 
 @media screen and (min-width: 720px) and (max-width: 1400px) {
@@ -120,10 +125,11 @@
     }
 
     .card {
-        width: 400px;
+        width: 380px;
+        height: 300px;
     }
 
-    .input-lg {
-        display: none !important;
+    .mobile-text {
+        font-size: 14px;
     }
 }
