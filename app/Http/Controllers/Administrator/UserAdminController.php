@@ -9,20 +9,23 @@ use Hexters\Ladmin\Exceptions\LadminException;
 use App\Models\Role;
 use App\DataTables\UserDatatables;
 
-class UserAdminController extends Controller {
+class UserAdminController extends Controller
+{
 
     protected $repository;
 
-    public function __construct(UserRepository $repository) {
-        $this->repository = $repository; 
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
     }
-  
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         ladmin()->allow('administrator.account.admin.index');
 
         return UserDatatables::view('ladmin::ladmin.index', [
@@ -39,7 +42,8 @@ class UserAdminController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         ladmin()->allow('administrator.account.admin.create');
 
         $data['roles'] = Role::all();
@@ -52,13 +56,13 @@ class UserAdminController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         ladmin()->allow('administrator.account.admin.create');
 
         $request->validate([
             'name' => ['required'],
-            'email' => ['required', 'email'],
-            'pass' => ['required'],
+            'nim' => ['required', 'numeric'],
             'role_id' => ['required']
         ]);
 
@@ -73,7 +77,6 @@ class UserAdminController extends Controller {
                 $e->getMessage()
             ]);
         }
-        
     }
 
     /**
@@ -82,7 +85,8 @@ class UserAdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         return redirect()->route('administrator.account.admin.index');
     }
 
@@ -92,7 +96,8 @@ class UserAdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         ladmin()->allow('administrator.account.admin.update');
 
         $data['roles'] = Role::all();
@@ -107,13 +112,14 @@ class UserAdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         ladmin()->allow('administrator.account.admin.update');
 
         $request->validate([
             'name' => ['required'],
-            'email' => ['required', 'email'],
-            'role_id' => ['required']    
+            'nim' => ['required', 'numeric'],
+            'role_id' => ['required']
         ]);
         try {
             $this->repository->updateUser($request, $id);
@@ -134,9 +140,10 @@ class UserAdminController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         ladmin()->allow('administrator.account.admin.destroy');
-        
+
         try {
             $this->repository->getModel()->findOrFail($id)->delete();
             session()->flash('success', [

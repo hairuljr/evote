@@ -56,7 +56,7 @@ class UserDatatables extends Datatables implements DataTablesInterface
     return [
       'title' => 'Users',
       'buttons' => view('vendor.ladmin.user._partials._topButton'),
-      'fields' => [__('Avatar'), __('Name'), __('Email'), __('Role'), __('Action')],
+      'fields' => [__('Avatar'), __('Name'), __('NIM'), __('Status'), __('Action')],
       'options' => [
         'processing' => true,
         'serverSide' => true,
@@ -64,7 +64,7 @@ class UserDatatables extends Datatables implements DataTablesInterface
         'columns' => [
           ['data' => 'avatar', 'class' => 'text-center'],
           ['data' => 'name'],
-          ['data' => 'email'],
+          ['data' => 'nim'],
           ['data' => 'roles.name', 'orderable' => false],
           ['data' => 'action', 'class' => 'text-center', 'orderable' => false]
         ]

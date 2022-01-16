@@ -1,1 +1,1 @@
-Copyright &copy; 2020-2021. <a href="https://github.com/hexters/ladmin" target="_blank"><strong>Hexters/Ladmin</strong></a>. All rights reserved.
+Copyright &copy; {{ date('Y') }}. <a href="http://jrcomp.info/" target="_blank"><strong>Jr Comp</strong></a>. All rights reserved.
