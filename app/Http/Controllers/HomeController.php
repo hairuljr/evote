@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NIMValidationRequest;
+use App\Models\Creation;
+use App\Models\Study;
 use App\Models\User;
+use App\Models\Vote;
+use App\Models\VoteHistory;
 
 class HomeController extends Controller
 {
@@ -24,12 +28,23 @@ class HomeController extends Controller
 
     public function vote()
     {
-        return view('vote');
+        if (!session('nim')) {
+            return redirect()->route('welcome');
+        }
+        $slug = request('m') ?? null;
+        $study = Study::whereSlug($slug)->first();
+        if ($study) {
+            $creations = Creation::whereStudyId($study->id)->latest()->paginate(8);
+        } else {
+            $creations = Creation::latest()->paginate(8);
+        }
+        return view('vote', compact('creations'));
     }
 
-    public function detail()
+    public function detail($slug)
     {
-        return view('detail-karya');
+        $creation = Creation::withCount('vote')->whereSlug($slug)->firstOrFail();
+        return view('detail-karya', compact('creation'));
     }
 
     public function login(NIMValidationRequest $request)
@@ -40,5 +55,45 @@ class HomeController extends Controller
         }
         session(['nim' => $user->nim]);
         return redirect()->route('vote');
+    }
+
+    public function submitVote()
+    {
+        $user = User::whereNim(session('nim'))->firstOrFail();
+
+        // query check apakah sudah memberikan vote pada karya ini
+        $voted = Vote::whereUserId($user->id)->whereCreationId(request('creation_id'))->count();
+        if ($voted >= 1) {
+            return redirect()
+                ->back()
+                ->withInfo('Anda sudah memberikan vote pada karya ini!');
+        }
+
+        // query check apakah sudah memberikan vote pada karya yang lain pada matkul ini, apakah ingin menggantinya?
+        $creation = Creation::find(request('creation_id'));
+        $hasVoted = Vote::whereUserId($user->id)
+            ->whereStudyId($creation->study_id)
+            ->count();
+        if ($hasVoted > 1) {
+            return redirect()
+                ->back()
+                ->withQuestion('Anda sudah memberikan vote pada karya lain di Matakuliah yang sama!');
+        }
+
+
+        // siapkan tabel history vote user
+        Vote::create([
+            'user_id' => $user->id,
+            'creation_id' => $creation->id,
+            'study_id' => $creation->study_id,
+            'note' => request('cMessage') ?? null
+        ]);
+
+        VoteHistory::create([
+            'user_id' => $user->id,
+            'creation_id' => $creation->id
+        ]);
+
+        return redirect()->back()->withSuccess('Terimakasih, Anda berhasil memberikan vote!');
     }
 }

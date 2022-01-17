@@ -20,4 +20,14 @@ class Creation extends Model
     {
         return $this->hasMany(PhotoCreation::class);
     }
+
+    public function vote()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
+    public function study()
+    {
+        return $this->belongsTo(Study::class);
+    }
 }

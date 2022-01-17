@@ -27,8 +27,8 @@
         </nav>
         <!-- Mashead header-->
         <header class="masthead">
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
+            <div class="container px-4">
+                <div class="row align-items-center">
                     <div class="col-lg-6">
                         <!-- Mashead text and app badges-->
                         <div class="mb-5 mb-lg-0 text-center text-lg-start">
@@ -72,5 +72,6 @@
             document.getElementById('reader__dashboard_section_swaplink').style.display = 'none';
             </script>
         @endif
+        @include('sweetalert::alert')
     </body>
 </html>
