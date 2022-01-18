@@ -27,7 +27,7 @@
 <body id="top">
   <x-navbar></x-navbar>
 
-  <section class="s-content">
+  <section class="s-content" style="{{ count($creations) < 1 ? 'padding-bottom: 54rem' : '' }}">
     <div class="row masonry-wrap">
       <div class="masonry">
         <div class="grid-sizer"></div>
@@ -61,17 +61,18 @@
             </div>
           </article>
         @empty
-            <h3 class="text-center">Belum ada karya yang diupload.</h3>
+            <h5 class="text-center">Belum ada karya yang diupload.</h5>
         @endforelse
       </div>
     </div>
-    {{-- <div class="row">
-      <div class="col-full">
-        {{ $creations->withQueryString()->links('components.pagination') }}
-      </div>
-    </div> --}}
   </section>
-
+  <footer class="bg-black text-center py-5">
+    <div class="container px-5">
+        <div class="text-white-50 small">
+            <div class="mb-2">&copy; {{ config('app.name') }} {{ date('Y') }}. All Rights Reserved.</div>
+        </div>
+    </div>
+  </footer>
   <div id="preloader">
     <div id="loader">
       <div class="line-scale">

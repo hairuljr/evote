@@ -36,7 +36,7 @@
                             <p class="lead fw-normal text-muted mb-5">Scan QR Code dikartu anda untuk memberikan voting pada karya yang anda sukai agar menjadi pemenangnya!</p>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 d-flex justify-content-center align-items-center">
                         <div style="width: 500px" id="reader"></div>
                     </div>
                 </div>
