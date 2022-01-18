@@ -17,6 +17,9 @@ class CreationDatatables extends Datatables implements DataTablesInterface
       ->editColumn('thumbnail', function ($item) {
         return "<img src=\"{$item->thumbnail}\" class=\"rounded-circle img-thumbnail\" width=\"50\" alt=\"Thumbnail\">";
       })
+      ->editColumn('study', function ($item) {
+        return $item->study->name ?? '-';
+      })
       ->addColumn('action', function ($item) {
         return view('ladmin::table.action', [
           'show' => null,
@@ -48,7 +51,7 @@ class CreationDatatables extends Datatables implements DataTablesInterface
     return [
       'title' => 'Creations',
       'buttons' => view('vendor.ladmin.creation._partials._topButton'),
-      'fields' => [__('Thumbnail'), __('Title'), __('Action')],
+      'fields' => [__('Thumbnail'), __('Title'), __('Mata Kuliah'), __('Action')],
       'options' => [
         'processing' => true,
         'serverSide' => true,
@@ -56,6 +59,7 @@ class CreationDatatables extends Datatables implements DataTablesInterface
         'columns' => [
           ['data' => 'thumbnail', 'class' => 'text-center'],
           ['data' => 'title'],
+          ['data' => 'study'],
           ['data' => 'action', 'class' => 'text-center', 'orderable' => false]
         ]
       ]

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Hexters\Ladmin\Exceptions\LadminException;
 use App\DataTables\CreationDatatables;
+use App\Models\Study;
 use App\Repositories\CreationRepository;
 
 class CreationController extends Controller
@@ -37,8 +38,8 @@ class CreationController extends Controller
     public function create()
     {
         ladmin()->allow('administrator.data.creation.create');
-
-        return view('vendor.ladmin.creation.create');
+        $data['study'] = Study::all();
+        return view('vendor.ladmin.creation.create', $data);
     }
 
     /**
@@ -52,6 +53,7 @@ class CreationController extends Controller
         ladmin()->allow('administrator.data.creation.create');
 
         $request->validate([
+            'study_id' => ['required', 'exists:studies,id'],
             'title' => ['required'],
             'description' => ['required']
         ]);
@@ -89,7 +91,7 @@ class CreationController extends Controller
     public function edit($id)
     {
         ladmin()->allow('administrator.data.creation.update');
-
+        $data['study'] = Study::all();
         $data['creation'] = $this->repository->getModel()->findOrFail($id);
         return view('vendor.ladmin.creation.edit', $data);
     }
@@ -106,6 +108,7 @@ class CreationController extends Controller
         ladmin()->allow('administrator.data.creation.update');
 
         $request->validate([
+            'study_id' => ['required', 'exists:studies,id'],
             'title' => ['required'],
             'description' => ['required']
         ]);

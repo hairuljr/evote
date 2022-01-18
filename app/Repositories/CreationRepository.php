@@ -28,6 +28,7 @@ class CreationRepository extends Repository implements MasterRepositoryInterface
     }
     $data['thumbnail'] = $imageFit ?? $creation->getRawOriginal('thumbnail');
     $data['title'] = $request->title;
+    $data['study_id'] = $request->study_id;
     $data['slug'] = Str::slug($request->title);
     $data['description'] = $request->description;
     $creation->update($data);
@@ -40,6 +41,7 @@ class CreationRepository extends Repository implements MasterRepositoryInterface
     $image = $request->file('thumbnail');
     $imageFit = upload($image, $this->path);
     $data['thumbnail'] = $imageFit;
+    $data['study_id'] = $request->study_id;
     $data['title'] = $request->title;
     $data['slug'] = Str::slug($request->title);
     $data['description'] = $request->description;

@@ -1,6 +1,27 @@
 <div class="row">
   <div class="col-md-12">
     <div class="form-group">
+      <label for="study_id" class="font-weight-bold">Mata Kuliah</label> <div class="input-group border rounded">
+        <select name="study_id" id="study_id" class="select2 form-control" data-allow-clear="true" data-placeholder="Pilih Mata Kuliah">
+          @if ($creation->study_id)
+            @foreach ($study as $item)
+              <option value="{{ $item->id }}" {{ $creation->study_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+            @endforeach
+          @else 
+            <option value=""></option>
+            @foreach ($study as $item)
+              <option value="{{ $item->id }}" {{ old('study_id') == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+            @endforeach
+          @endif
+        </select>
+      </div>
+    </div>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
       <label for="title" class="font-weight-bold">Title *</label>
       <div class="input-group border rounded">
           <input type="text" placeholder="Title" class="form-control" name="title" id="title" value="{{ old('title', $creation->title) }}" required>
@@ -47,12 +68,14 @@
 
 @push('style')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @push('script')
 <script src="{{ asset('tinymce/tinymce.bundle.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/themes/fas/theme.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
   var options = {
       selector: "#text", 
@@ -101,6 +124,10 @@
 
   $("#imgInp").change(function(){
       readURL(this);
+  });
+
+  $('.select2').select2({
+    theme: "classic"
   });
 </script>
 @endpush

@@ -65,11 +65,11 @@
         @endforelse
       </div>
     </div>
-    <div class="row">
+    {{-- <div class="row">
       <div class="col-full">
         {{ $creations->withQueryString()->links('components.pagination') }}
       </div>
-    </div>
+    </div> --}}
   </section>
 
   <div id="preloader">

@@ -34,9 +34,9 @@ class HomeController extends Controller
         $slug = request('m') ?? null;
         $study = Study::whereSlug($slug)->first();
         if ($study) {
-            $creations = Creation::whereStudyId($study->id)->latest()->paginate(8);
+            $creations = Creation::whereStudyId($study->id)->latest()->get();
         } else {
-            $creations = Creation::latest()->paginate(8);
+            $creations = Creation::latest()->get();
         }
         return view('vote', compact('creations'));
     }

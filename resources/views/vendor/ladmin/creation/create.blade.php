@@ -4,7 +4,7 @@
   <form action="{{ route('administrator.data.creation.store') }}" method="post" enctype="multipart/form-data">
     @csrf 
     
-    @include('vendor.ladmin.creation._partials._form', ['creation' => (new App\Models\Creation)])
+    @include('vendor.ladmin.creation._partials._form', ['creation' => (new App\Models\Creation), 'study' => $study])
 
     <div class="text-right">
       <button type="submit" class="btn btn-primary">

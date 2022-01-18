@@ -5,7 +5,7 @@
     @csrf 
     @method('PUT')
     
-    @include('vendor.ladmin.creation._partials._form', ['creation' => $creation])
+    @include('vendor.ladmin.creation._partials._form', ['creation' => $creation, 'study' => $study])
 
     <div class="text-right">
       <button type="submit" class="btn btn-primary">
