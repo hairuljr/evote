@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Hexters\Ladmin\LadminLogable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model
 {
-    use HasFactory;
+    use HasFactory, LadminLogable;
 
     protected $guarded = [];
 

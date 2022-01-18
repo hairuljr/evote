@@ -123,6 +123,34 @@ return [
     'gates' => [],
     'submenus' => [
 
+      // Study
+      [
+        'gate' => 'administrator.data.study.index',
+        'name' => 'Study',
+        'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+        'route' => ['administrator.data.study.index', []],
+        'isActive' => 'data/study*',
+        'id' => '',
+        'gates' => [
+          [
+            'gate' => 'administrator.data.study.create',
+            'title' => 'Create Study',
+            'description' => 'User can create new study'
+          ],
+          [
+            'gate' => 'administrator.data.study.update',
+            'title' => 'Update Study',
+            'description' => 'User can update study'
+          ],
+          [
+            'gate' => 'administrator.data.study.destroy',
+            'title' => 'Delete Study',
+            'description' => 'User can delete study'
+          ]
+        ],
+      ],
+
+      // Creation
       [
         'gate' => 'administrator.data.creation.index',
         'name' => 'Creation',
@@ -176,32 +204,7 @@ return [
         ],
       ],
 
-      // Study
-      [
-        'gate' => 'administrator.data.study.index',
-        'name' => 'Study',
-        'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
-        'route' => ['administrator.data.study.index', []],
-        'isActive' => 'data/study*',
-        'id' => '',
-        'gates' => [
-          [
-            'gate' => 'administrator.data.study.create',
-            'title' => 'Create Study',
-            'description' => 'User can create new study'
-          ],
-          [
-            'gate' => 'administrator.data.study.update',
-            'title' => 'Update Study',
-            'description' => 'User can update study'
-          ],
-          [
-            'gate' => 'administrator.data.study.destroy',
-            'title' => 'Delete Study',
-            'description' => 'User can delete study'
-          ]
-        ],
-      ],
+
 
       // Votes
       [
