@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Administrator\{CreationController, StudyController};
+use App\Http\Controllers\Administrator\{CreationController, PhotoCreationController, StudyController};
 use Illuminate\Support\Facades\Route;
 use Hexters\Ladmin\Routes\Ladmin;
 
@@ -21,6 +21,7 @@ Ladmin::route(function () {
 
   Route::group(['as' => 'data.', 'prefix' => 'data'], function () {
     Route::resource('/creation', CreationController::class);
+    Route::resource('/photocreation', PhotoCreationController::class);
     Route::resource('/study', StudyController::class);
   });
 });

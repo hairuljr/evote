@@ -149,6 +149,34 @@ return [
         ],
       ],
 
+      // Photo Creation
+      [
+        'gate' => 'administrator.data.photocreation.index',
+        'name' => 'Photo Creation',
+        'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+        'route' => ['administrator.data.photocreation.index', []],
+        'isActive' => 'data/photocreation*',
+        'id' => '',
+        'gates' => [
+          [
+            'gate' => 'administrator.data.photocreation.create',
+            'title' => 'Create Photo Creation',
+            'description' => 'User can create new photo creation'
+          ],
+          [
+            'gate' => 'administrator.data.photocreation.update',
+            'title' => 'Update Photo Creation',
+            'description' => 'User can update photo creation'
+          ],
+          [
+            'gate' => 'administrator.data.photocreation.destroy',
+            'title' => 'Delete Photo Creation',
+            'description' => 'User can delete photo creation'
+          ]
+        ],
+      ],
+
+      // Study
       [
         'gate' => 'administrator.data.study.index',
         'name' => 'Study',
