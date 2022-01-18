@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Administrator\{CreationController, PhotoCreationController, StudyController};
+use App\Http\Controllers\Administrator\{CreationController, PhotoCreationController, StudyController, VoteController};
 use Illuminate\Support\Facades\Route;
 use Hexters\Ladmin\Routes\Ladmin;
 
@@ -23,5 +23,6 @@ Ladmin::route(function () {
     Route::resource('/creation', CreationController::class);
     Route::resource('/photocreation', PhotoCreationController::class);
     Route::resource('/study', StudyController::class);
+    Route::resource('/vote', VoteController::class);
   });
 });

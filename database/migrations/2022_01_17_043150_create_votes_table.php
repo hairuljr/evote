@@ -17,6 +17,7 @@ class CreateVotesTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('creation_id');
+            $table->foreignId('study_id');
             $table->text('note')->nullable();
             $table->timestamps();
         });

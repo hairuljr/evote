@@ -202,6 +202,23 @@ return [
           ]
         ],
       ],
+
+      // Votes
+      [
+        'gate' => 'administrator.data.vote.index',
+        'name' => 'Vote',
+        'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+        'route' => ['administrator.data.vote.index', []],
+        'isActive' => 'data/vote*',
+        'id' => '',
+        'gates' => [
+          [
+            'gate' => 'administrator.data.vote.show',
+            'title' => 'Views detail Vote',
+            'description' => 'User can view detail for all vote'
+          ]
+        ],
+      ],
     ]
   ],
 
