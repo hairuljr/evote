@@ -149,27 +149,31 @@ return [
         ],
       ],
 
-      // [
-      //   'gate' => 'administrator.access.permission.index',
-      //   'name' => 'Permission',
-      //   'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
-      //   'route' => ['administrator.access.permission.index', []],
-      //   'isActive' => 'access/permission*',
-      //   'id' => '',
-      //   'gates' => [
-      //     [
-      //       'gate' => 'administrator.access.permission.show',
-      //       'title' => 'Views detail Permission',
-      //       'description' => 'User can view detail for all permission'
-      //     ],
-      //     [
-      //       'gate' => 'administrator.access.permission.assign',
-      //       'title' => 'Assign Permission',
-      //       'description' => 'User can assign for all permission'
-      //     ],
-
-      //   ],
-      // ]
+      [
+        'gate' => 'administrator.data.study.index',
+        'name' => 'Study',
+        'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+        'route' => ['administrator.data.study.index', []],
+        'isActive' => 'data/study*',
+        'id' => '',
+        'gates' => [
+          [
+            'gate' => 'administrator.data.study.create',
+            'title' => 'Create Study',
+            'description' => 'User can create new study'
+          ],
+          [
+            'gate' => 'administrator.data.study.update',
+            'title' => 'Update Study',
+            'description' => 'User can update study'
+          ],
+          [
+            'gate' => 'administrator.data.study.destroy',
+            'title' => 'Delete Study',
+            'description' => 'User can delete study'
+          ]
+        ],
+      ],
     ]
   ],
 
