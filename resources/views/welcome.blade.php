@@ -7,6 +7,9 @@
         <meta name="author" content="" />
         <title>{{ config('app.name') }}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('template/assets/favicon.ico') }}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Google fonts-->
@@ -22,7 +25,9 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
             <div class="container px-5">
-                <a class="navbar-brand fw-bold" href="#page-top">{{ session('nim') ?? config('app.name') }}</a>
+                <a class="navbar-brand fw-bold text-center" href="#page-top">
+                    <img class="w-50" src="{{ config('ladmin.logo') }}" alt="Logo Fesma">
+                </a>
             </div>
         </nav>
         <!-- Mashead header-->

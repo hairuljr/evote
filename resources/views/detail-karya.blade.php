@@ -15,8 +15,10 @@
   <script>eval(mod_pagespeed_F_5s4xpU58);</script>
   <script>eval(mod_pagespeed_6uAVvYLEkz);</script>
 
-  <link rel="shortcut icon" href="{{ asset('template/assets/favicon.ico') }}" type="image/x-icon">
   <link rel="icon" type="image/x-icon" href="{{ asset('template/assets/favicon.ico') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
   <link rel="stylesheet" href="{{ asset('css/scrollbar.css') }}" />
 
   <style>
@@ -29,6 +31,20 @@
     }
     textarea {
         min-height: 10rem !important;
+    }
+
+    .header__logo img {
+      height: 60px !important;
+    }
+    .header__nav-wrap {
+      margin-top: 8px !important;
+      padding-top: 8px !important;
+    }
+
+    @media only screen and (max-width: 540px) {
+      .header__logo img {
+        height: auto !important;
+      }
     }
   </style>
 </head>
