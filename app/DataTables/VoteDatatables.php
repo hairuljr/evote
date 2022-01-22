@@ -21,6 +21,9 @@ class VoteDatatables extends Datatables implements DataTablesInterface
     $data = self::$data;
 
     return $this->eloquent(Creation::query())
+      ->addColumn('matkul', function ($item) {
+        return $item->study->name ?? '-';
+      })
       ->addColumn('count_vote', function ($item) {
         return $item->vote->count() ?? 0;
       })
@@ -50,7 +53,7 @@ class VoteDatatables extends Datatables implements DataTablesInterface
 
     return [
       'title' => 'List Vote',
-      'fields' => [__('Mata Kuliah'), __('Jumlah Vote'), __('Action')],
+      'fields' => ['Nama Karya', __('Mata Kuliah'), __('Jumlah Vote'), __('Action')],
       'buttons' => null,
       'options' => [
         'processing' => true,
@@ -58,6 +61,7 @@ class VoteDatatables extends Datatables implements DataTablesInterface
         'ajax' => request()->fullurl(),
         'columns' => [
           ['data' => 'title'],
+          ['data' => 'matkul'],
           ['data' => 'count_vote'],
           ['data' => 'action', 'class' => 'text-center', 'orderable' => false]
         ]
