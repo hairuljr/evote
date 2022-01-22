@@ -79,10 +79,10 @@ class HomeController extends Controller
         $hasVoted = Vote::whereUserId($user->id)
             ->whereStudyId($creation->study_id)
             ->count();
-        if ($hasVoted > 1) {
+        if ($hasVoted >= 1) {
             return redirect()
                 ->back()
-                ->withQuestion('Anda sudah memberikan vote pada karya lain di Matakuliah yang sama!');
+                ->withWarning('Anda sudah memberikan vote pada karya lain di Matakuliah yang sama!');
         }
 
 
@@ -96,7 +96,8 @@ class HomeController extends Controller
 
         VoteHistory::create([
             'user_id' => $user->id,
-            'creation_id' => $creation->id
+            'creation_id' => $creation->id,
+            'note' => request('cMessage') ?? null
         ]);
 
         return redirect()->back()->withSuccess('Terimakasih, Anda berhasil memberikan vote!');
