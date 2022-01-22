@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Administrator\{CreationController, PhotoCreationController, StudyController, VoteController};
 use Illuminate\Support\Facades\Route;
-use Hexters\Ladmin\Routes\Ladmin;
+use App\Helpers\Ladmin;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
 Route::get('/connect/{nim}', [App\Http\Controllers\HomeController::class, 'connect'])->name('connect');

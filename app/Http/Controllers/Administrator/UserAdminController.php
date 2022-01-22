@@ -50,6 +50,42 @@ class UserAdminController extends Controller
         return view('vendor.ladmin.user.create', $data);
     }
 
+    public function generate()
+    {
+        ladmin()->allow('administrator.account.admin.create');
+
+        $data['roles'] = Role::all();
+        return view('vendor.ladmin.user.generate', $data);
+    }
+
+    public function storeGenerate(Request $request)
+    {
+        ladmin()->allow('administrator.account.admin.create');
+
+        $request->validate(
+            [
+                'numbers' => ['required', 'numeric', 'digits_between:1,999', 'min:1'],
+                'role_id' => ['required']
+            ],
+            [
+                'numbers.min' => 'Jumlah ID tidak boleh nol!',
+                'numbers.digits_between' => 'Jumlah ID tidak boleh diatas ratusan!'
+            ]
+        );
+
+        try {
+            $this->repository->generateUser($request);
+            session()->flash('success', [
+                'User has been generated sucessfully'
+            ]);
+            return redirect()->route('administrator.account.admin.index');
+        } catch (LadminException $e) {
+            return redirect()->back()->withErrors([
+                $e->getMessage()
+            ]);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *

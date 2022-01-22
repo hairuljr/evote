@@ -97,7 +97,7 @@
   </div>
 
   <script src="{{ asset('/js/ladmin/app.js') }}"></script>
-  
+  @include('sweetalert::alert')
   {!! $scripts ?? null !!}
   @stack('script')
 
