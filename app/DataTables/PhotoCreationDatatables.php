@@ -14,6 +14,9 @@ class PhotoCreationDatatables extends Datatables implements DataTablesInterface
     $data = self::$data;
 
     return $this->eloquent(Creation::query())
+      ->addColumn('matkul', function ($item) {
+        return $item->study->name ?? '-';
+      })
       ->addColumn('action', function ($item) {
         return view('ladmin::table.action', [
           'show' => null,
@@ -45,13 +48,14 @@ class PhotoCreationDatatables extends Datatables implements DataTablesInterface
     return [
       'title' => 'Creations',
       // 'buttons' => view('vendor.ladmin.photo-creation._partials._topButton'),
-      'fields' => [__('Nama Karya'), __('Action')],
+      'fields' => [__('Nama Karya'), 'Nama Mata Kuliah', __('Action')],
       'options' => [
         'processing' => true,
         'serverSide' => true,
         'ajax' => request()->fullurl(),
         'columns' => [
           ['data' => 'title', 'class' => 'text-center'],
+          ['data' => 'matkul', 'class' => 'text-center'],
           ['data' => 'action', 'class' => 'text-center', 'orderable' => false]
         ]
       ]
