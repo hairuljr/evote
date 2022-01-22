@@ -24,10 +24,18 @@
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-            <div class="container px-5">
-                <a class="navbar-brand fw-bold text-center" href="#page-top">
+            <div class="container px-5 container-sm">
+                <a class="navbar-brand fw-bold" href="#page-top">
                     <img width="22%" src="{{ config('ladmin.logo') }}" alt="Logo Fesma">
                 </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi-list"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-2 my-3 my-lg-0">
+                        <li class="nav-item"><a class="nav-link me-lg-3 text-center" href="{{ route('login-manual') }}">Login Manual</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <!-- Mashead header-->

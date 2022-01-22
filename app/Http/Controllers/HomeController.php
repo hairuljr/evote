@@ -26,6 +26,11 @@ class HomeController extends Controller
         return view('login', compact('number'));
     }
 
+    public function loginManual()
+    {
+        return view('login-manual');
+    }
+
     public function vote()
     {
         if (!session('nim')) {
