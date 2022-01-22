@@ -25,6 +25,9 @@ class UserDatatables extends Datatables implements DataTablesInterface
       ->editColumn('roles.name', function ($item) {
         return $item->roles->pluck('name');
       })
+      ->editColumn('no_hp', function ($item) {
+        return $item->no_hp ?? '-';
+      })
       ->addColumn('action', function ($item) {
         return view('ladmin::table.action', [
           'show' => null,
@@ -56,7 +59,7 @@ class UserDatatables extends Datatables implements DataTablesInterface
     return [
       'title' => 'Users',
       'buttons' => view('vendor.ladmin.user._partials._topButton'),
-      'fields' => [__('Avatar'), __('Name'), __('NIM'), __('Status'), __('Action')],
+      'fields' => [__('Avatar'), __('Name'), __('NIM'), 'No. HP', __('Status'), __('Action')],
       'options' => [
         'processing' => true,
         'serverSide' => true,
@@ -65,6 +68,7 @@ class UserDatatables extends Datatables implements DataTablesInterface
           ['data' => 'avatar', 'class' => 'text-center'],
           ['data' => 'name'],
           ['data' => 'nim'],
+          ['data' => 'no_hp'],
           ['data' => 'roles.name', 'orderable' => false],
           ['data' => 'action', 'class' => 'text-center', 'orderable' => false]
         ]

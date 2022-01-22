@@ -118,6 +118,7 @@ class UserAdminController extends Controller
 
         $request->validate([
             'name' => ['required'],
+            'no_hp' => ['required'],
             'nim' => ['required', 'numeric'],
             'role_id' => ['required']
         ]);

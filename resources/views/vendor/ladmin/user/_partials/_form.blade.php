@@ -14,6 +14,14 @@
   <input type="nim" placeholder="10 digit NIM" class="form-control" name="nim" id="nim" required value="{{ old('nim', $user->nim) }}" maxlength="10">
 </x-ladmin-form-group>
 
+<x-ladmin-form-group name="no_hp" label="No. HP *">
+  <x-slot name="prepend">
+    {!! ladmin()->icon('device-mobile') !!}
+  </x-slot>
+
+  <input type="no_hp" placeholder="No. HP/WhatsApp" class="form-control" name="no_hp" id="no_hp" required value="{{ old('no_hp', $user->no_hp) }}" maxlength="20">
+</x-ladmin-form-group>
+
 
 @if (isset($roles))
 <x-ladmin-form-group name="role_id" label="Role *">
