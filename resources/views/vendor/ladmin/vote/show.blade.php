@@ -9,6 +9,9 @@
             <th>No.</th>
             <th>NIM Voter</th>
             <th>Nama Voter</th>
+            <th>No. HP</th>
+            <th>Status</th>
+            <th>Tanggal Vote</th>
           </tr>
         </thead>
         <tbody>
@@ -18,6 +21,9 @@
                 <td>{{ $loop->iteration }}.</td>
                 <td>{{ $item->user->nim ?? '-' }}</td>
                 <td>{{ $item->user->name ?? '-' }}</td>
+                <td>{{ $item->user->no_hp ?? '-' }}</td>
+                <td>{{ $item->user->role->name ?? '-' }}</td>
+                <td>{{ tanggal($item->created_at, 'DDD MMMM YYYY | H:mm') ?? '-' }} WIB</td>
               </tr>
             @empty
               <tr>
