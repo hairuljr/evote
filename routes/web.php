@@ -11,6 +11,7 @@ Route::get('/vote', [App\Http\Controllers\HomeController::class, 'vote'])->name(
 Route::get('/detail/{slug}', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
 Route::post('/login-qr', [App\Http\Controllers\HomeController::class, 'login'])->name('login-qr');
 Route::post('/submit-vote', [App\Http\Controllers\HomeController::class, 'submitVote'])->name('submit-vote');
+Route::post('/change-vote', [App\Http\Controllers\HomeController::class, 'changeVote'])->name('change-vote');
 Route::get('clear', function () {
   session()->flush();
   return redirect()->route('welcome')->withSuccess('Anda berhasil logout!');

@@ -46,6 +46,8 @@
         height: auto !important;
       }
     }
+    .swal2-popup { font-size: 1.5rem !important; }
+    .swal2-styled { padding: 0 3rem !important; }
   </style>
 </head>
 
@@ -93,9 +95,9 @@
                                 <div class="message form-field">
                                     <input type="hidden" name="creation_id" value="{{ $creation->id }}">
                                     <textarea name="cMessage" id="cMessage" class="full-width"
-                                        placeholder="Kesan, Kritik ataupun Saran" autocomplete="off"></textarea>
+                                        placeholder="Kesan, Kritik ataupun Saran" autocomplete="off">{{ old('cMessage') }}</textarea>
                                 </div>
-                                <button type="submit" class="submit btn--primary btn--large full-width">Submit</button>
+                                <button type="submit" class="submit btn--primary btn--large full-width">Vote Sekarang</button>
                             </fieldset>
                         </form>
                     </div>
@@ -124,5 +126,49 @@
   <script src="{{ asset('frontend/js/plugins.js') }}"></script>
   <script src="{{ asset('frontend/js/main.js') }}"></script>
   @include('sweetalert::alert')
+    <script>
+        @if (session('change'))
+            Swal.fire({
+                title: 'Apakah anda ingin mengganti vote?',
+                text: "Anda sudah memberikan vote pada karya lain di Matakuliah yang sama!",
+                icon: 'question',
+                width: '600px',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                reverseButtons: true,
+                cancelButtonText: 'Tidak Jadi',
+                confirmButtonText: 'Ya, Ganti Vote!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var _token = "{{ csrf_token() }}"
+                    var creation = "{{ $creation->id }}"
+                    var study = "{{ $creation->study_id }}"
+                    var message = $('#cMessage').val()
+
+                    $.ajax({
+                        url: "{{ route('change-vote') }}",
+                        type:'POST',
+                        data: {
+                            _token: _token,
+                            creation_id: creation,
+                            study_id: study,
+                            cMessage: message
+                        },
+                        success: function(data) {
+                            Swal.fire(
+                            'Terimakasih!',
+                            'Vote diganti, Anda berhasil memberikan vote pada karya ini!',
+                            'success'
+                            )
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 3000);
+                        }
+                    });
+                }
+            })
+        @endif
+    </script>
 </body>
 </html>
