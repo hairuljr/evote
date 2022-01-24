@@ -7,6 +7,9 @@
         <meta name="author" content="" />
         <title>{{ config('app.name') }}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('template/assets/favicon.ico') }}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Google fonts-->
@@ -25,32 +28,19 @@
               <div class="card py-5 px-3">
                 <form action="{{ route('login-qr') }}" method="post">
                   @csrf
-                  <h5 class="m-0">Login menggunakan NIM</h5>
-                  <span class="mobile-text">Masukkan 6 digit NIM anda ex: <b class="text-danger">199901 </b>
+                  <h4 class="m-0">Login menggunakan NIM</h4>
+                  <span class="mobile-text">Masukkan 10 digit NIM anda ex: <b class="text-danger fst-italic">2919990102 </b>
                   </span>
-                  <div class="d-flex flex-row mt-5 input-lg">
-                    <input name="digit_1" type="text" class="form-control" autofocus="">
-                    <input name="digit_2" type="text" class="form-control" required>
-                    <input name="digit_3" type="text" class="form-control" required>
-                    <input name="digit_4" type="text" class="form-control" required>
-                    <input name="digit_5" type="text" class="form-control" required>
-                    <input name="digit_6" type="text" class="form-control" required>
-                    <input name="digit_7" type="text" class="form-control" required>
-                    <input name="digit_8" type="text" class="form-control" required>
-                    <input name="digit_9" type="text" class="form-control" required>
-                    <input name="digit_10" type="text" class="form-control" required>
+                  <div class="d-flex flex-row mt-5">
+                    <input maxlength="10" name="digit" type="text" value="{{ old('digit', $number) }}" class="form-control" placeholder="Masukkan NIM disini" required autocomplete="off">
                   </div>
-                  <input name="all_digit" type="text" class="form-control d-md-none" placeholder="Masukkan NIM disini" required>
-                  @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                      <div class="mt-2 p-2 alert alert-warning alert-dismissible fade show" role="alert">{{ $error }}
+                  @if (session('error'))
+                      <div class="mt-2 p-2 alert alert-warning alert-dismissible fade show" role="alert">{{ session('error') }}
                         <button type="button" class="p-3 btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
-                    @endforeach
                   @endif
                   <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary">MASUK</button>
-                    <span class="d-block mobile-text mt-3">*Anda hanya bisa melakukan satu kali Vote.</span>
                   </div>
                 </form>
               </div>
@@ -59,7 +49,15 @@
         </section>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <!-- Core theme JS-->
         <script src="{{ asset('template/js/scripts.js') }}"></script>
+        <script>
+          $(function() {
+              $("input[name='digit']").on('input', function(e) {
+                  $(this).val($(this).val().replace(/[^0-9]/g, ''));
+              });
+          });
+      </script>
     </body>
 </html>

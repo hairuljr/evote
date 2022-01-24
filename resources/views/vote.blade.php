@@ -9,166 +9,86 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <link rel="stylesheet" href="{{ asset('frontend/css/base.css%2bvendor.css%2bmain.css.pagespeed.cc.9fgRYB3Ugn.css') }}" />
+  <link rel="stylesheet" href="{{ asset('frontend/css/base.css') }}" />
 
-  <script src="{{ asset('frontend/js/modernizr.js%2bpace.min.js.pagespeed.jc.3cjs7RKjPU.js') }}"></script>
+  <script src="{{ asset('frontend/js/modernizr.js') }}"></script>
   <script>eval(mod_pagespeed_F_5s4xpU58);</script>
   <script>eval(mod_pagespeed_6uAVvYLEkz);</script>
 
-  <link rel="shortcut icon" href="{{ asset('template/assets/favicon.ico') }}" type="image/x-icon">
   <link rel="icon" type="image/x-icon" href="{{ asset('template/assets/favicon.ico') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+  <style>
+    .disabled {
+      pointer-events: none;
+    }
+    .header__logo img {
+      height: 60px !important;
+    }
+    .header__nav-wrap {
+      margin-top: 8px !important;
+      padding-top: 8px !important;
+    }
+
+    @media only screen and (max-width: 540px) {
+      .header__logo img {
+        height: auto !important;
+      }
+    }
+
+  </style>
 </head>
 
 <body id="top">
+  <x-navbar></x-navbar>
 
-  <section class="s-content">
+  <section class="s-content" style="{{ count($creations) < 1 ? 'padding-bottom: 54rem' : '' }}">
     <div class="row masonry-wrap">
       <div class="masonry">
         <div class="grid-sizer"></div>
-        <article class="masonry__brick entry format-gallery" data-aos="fade-up">
-          <div class="entry__thumb slider">
-            <div class="slider__slides">
-              <div class="slider__slide">
-                <img src="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-1-400.jpg') }}"
-                  srcset="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-1-400.jpg') }} 1x, {{ asset('frontend/images/thumbs/masonry/gallery/gallery-1-800.jpg') }} 2x"
-                  alt="">
-              </div>
-              <div class="slider__slide">
-                <img src="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-2-400.jpg') }}"
-                  srcset="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-2-400.jpg') }} 1x, {{ asset('frontend/images/thumbs/masonry/gallery/gallery-2-800.jpg') }} 2x"
-                  alt="">
-              </div>
-              <div class="slider__slide">
-                <img src="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-3-400.jpg') }}"
-                  srcset="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-3-400.jpg') }} 1x, {{ asset('frontend/images/thumbs/masonry/gallery/gallery-3-800.jpg') }} 2x"
-                  alt="">
+        @forelse ($creations as $item)
+          <article class="masonry__brick entry format-gallery" data-aos="fade-up">
+            <div class="entry__thumb slider">
+              <div class="slider__slides">
+                @foreach ($item->photo as $photo)
+                  <div class="slider__slide">
+                    <img src="{{ $photo->picture }}"
+                      srcset="{{ $photo->picture }} 1x, {{ $photo->picture }} 2x"
+                      alt="Foto karya">
+                  </div> 
+                @endforeach
               </div>
             </div>
-          </div>
-          <div class="entry__text">
-            <div class="entry__header">
-              <div class="entry__date">
-                <a href="single-gallery.html">December 10, 2017</a>
+            <div class="entry__text">
+              <div class="entry__header">
+                <h1 class="entry__title"><a href="{{ route('detail', $item->slug) }}">{{ $item->title }}</a></h1>
               </div>
-              <h1 class="entry__title"><a href="single-gallery.html">Workspace Design Trends and Ideas.</a></h1>
-            </div>
-            <div class="entry__excerpt">
-              <p>
-                Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor
-                nulla sed commodo est ad minim elit reprehenderit nisi officia aute incididunt velit sint in aliqua...
-              </p>
-            </div>
-            <div class="entry__meta">
-              <span class="entry__meta-links">
-                <a href="category.html">Work</a>
-                <a href="category.html">Management</a>
-              </span>
-            </div>
-          </div>
-        </article>
-        <article class="masonry__brick entry format-gallery" data-aos="fade-up">
-          <div class="entry__thumb slider">
-            <div class="slider__slides">
-              <div class="slider__slide">
-                <img src="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-1-400.jpg') }}"
-                  srcset="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-1-400.jpg') }} 1x, {{ asset('frontend/images/thumbs/masonry/gallery/gallery-1-800.jpg') }} 2x"
-                  alt="">
+              <div class="entry__excerpt">
+                {{-- <p> --}}
+                  {!! Str::words($item->description, 25, '...') !!}
+                {{-- </p> --}}
               </div>
-              <div class="slider__slide">
-                <img src="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-2-400.jpg') }}"
-                  srcset="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-2-400.jpg') }} 1x, {{ asset('frontend/images/thumbs/masonry/gallery/gallery-2-800.jpg') }} 2x"
-                  alt="">
-              </div>
-              <div class="slider__slide">
-                <img src="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-3-400.jpg') }}"
-                  srcset="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-3-400.jpg') }} 1x, {{ asset('frontend/images/thumbs/masonry/gallery/gallery-3-800.jpg') }} 2x"
-                  alt="">
+              <div class="entry__meta">
+                <span class="entry__meta-links">
+                  <a href="{{ route('detail', $item->slug) }}">Lihat Selengkapnya</a>
+                </span>
               </div>
             </div>
-          </div>
-          <div class="entry__text">
-            <div class="entry__header">
-              <div class="entry__date">
-                <a href="single-gallery.html">December 10, 2017</a>
-              </div>
-              <h1 class="entry__title"><a href="single-gallery.html">Workspace Design Trends and Ideas.</a></h1>
-            </div>
-            <div class="entry__excerpt">
-              <p>
-                Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor
-                nulla sed commodo est ad minim elit reprehenderit nisi officia aute incididunt velit sint in aliqua...
-              </p>
-            </div>
-            <div class="entry__meta">
-              <span class="entry__meta-links">
-                <a href="category.html">Work</a>
-                <a href="category.html">Management</a>
-              </span>
-            </div>
-          </div>
-        </article>
-        <article class="masonry__brick entry format-gallery" data-aos="fade-up">
-          <div class="entry__thumb slider">
-            <div class="slider__slides">
-              <div class="slider__slide">
-                <img src="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-1-400.jpg') }}"
-                  srcset="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-1-400.jpg') }} 1x, {{ asset('frontend/images/thumbs/masonry/gallery/gallery-1-800.jpg') }} 2x"
-                  alt="">
-              </div>
-              <div class="slider__slide">
-                <img src="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-2-400.jpg') }}"
-                  srcset="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-2-400.jpg') }} 1x, {{ asset('frontend/images/thumbs/masonry/gallery/gallery-2-800.jpg') }} 2x"
-                  alt="">
-              </div>
-              <div class="slider__slide">
-                <img src="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-3-400.jpg') }}"
-                  srcset="{{ asset('frontend/images/thumbs/masonry/gallery/gallery-3-400.jpg') }} 1x, {{ asset('frontend/images/thumbs/masonry/gallery/gallery-3-800.jpg') }} 2x"
-                  alt="">
-              </div>
-            </div>
-          </div>
-          <div class="entry__text">
-            <div class="entry__header">
-              <div class="entry__date">
-                <a href="single-gallery.html">December 10, 2017</a>
-              </div>
-              <h1 class="entry__title"><a href="single-gallery.html">Workspace Design Trends and Ideas.</a></h1>
-            </div>
-            <div class="entry__excerpt">
-              <p>
-                Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor
-                nulla sed commodo est ad minim elit reprehenderit nisi officia aute incididunt velit sint in aliqua...
-              </p>
-            </div>
-            <div class="entry__meta">
-              <span class="entry__meta-links">
-                <a href="category.html">Work</a>
-                <a href="category.html">Management</a>
-              </span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-full">
-        <nav class="pgn">
-          <ul>
-            <li><a class="pgn__prev" href="#0">Prev</a></li>
-            <li><a class="pgn__num" href="#0">1</a></li>
-            <li><span class="pgn__num current">2</span></li>
-            <li><a class="pgn__num" href="#0">3</a></li>
-            <li><a class="pgn__num" href="#0">4</a></li>
-            <li><a class="pgn__num" href="#0">5</a></li>
-            <li><span class="pgn__num dots">…</span></li>
-            <li><a class="pgn__num" href="#0">8</a></li>
-            <li><a class="pgn__next" href="#0">Next</a></li>
-          </ul>
-        </nav>
+          </article>
+        @empty
+            <h5 class="text-center">Belum ada karya yang diupload.</h5>
+        @endforelse
       </div>
     </div>
   </section>
-
+  <footer class="bg-black text-center py-5">
+    <div class="container px-5">
+        <div class="text-white-50 small">
+            <div class="mb-2">&copy; {{ config('app.name') }} {{ date('Y') }}. All Rights Reserved.</div>
+        </div>
+    </div>
+  </footer>
   <div id="preloader">
     <div id="loader">
       <div class="line-scale">
@@ -184,5 +104,8 @@
   <script src="{{ asset('frontend/js/jquery-3.2.1.min.js') }}"></script>
   <script src="{{ asset('frontend/js/plugins.js') }}"></script>
   <script src="{{ asset('frontend/js/main.js') }}"></script>
+  <script>
+    $("p").removeClass("lead");
+  </script>
 </body>
 </html>

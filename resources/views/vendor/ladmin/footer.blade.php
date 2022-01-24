@@ -1,0 +1,1 @@
+Copyright &copy; {{ date('Y') }}. <a href="http://jrcomp.info/" target="_blank"><strong>Jr Comp</strong></a>. All rights reserved.
