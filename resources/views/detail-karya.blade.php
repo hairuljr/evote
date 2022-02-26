@@ -125,6 +125,7 @@
   <script src="{{ asset('frontend/js/jquery-3.2.1.min.js') }}"></script>
   <script src="{{ asset('frontend/js/plugins.js') }}"></script>
   <script src="{{ asset('frontend/js/main.js') }}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @include('sweetalert::alert')
     <script>
         @if (session('change'))

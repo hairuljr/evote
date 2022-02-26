@@ -31,30 +31,6 @@ class HomeController extends Controller
         return view('login-manual');
     }
 
-    public function vote()
-    {
-        if (!session('nim')) {
-            return redirect()->route('welcome');
-        }
-        $slug = request('m') ?? null;
-        $study = Study::whereSlug($slug)->first();
-        if ($study) {
-            $creations = Creation::whereStudyId($study->id)->latest()->get();
-        } else {
-            $creations = Creation::latest()->get();
-        }
-        return view('vote', compact('creations'));
-    }
-
-    public function detail($slug)
-    {
-        if (!session('nim')) {
-            return redirect()->route('welcome');
-        }
-        $creation = Creation::withCount('vote')->whereSlug($slug)->firstOrFail();
-        return view('detail-karya', compact('creation'));
-    }
-
     public function login(NIMValidationRequest $request)
     {
         $user = User::whereNim($request->digit)->first();
@@ -65,11 +41,26 @@ class HomeController extends Controller
         return redirect()->route('vote');
     }
 
+    public function vote()
+    {
+        $slug = request('m') ?? null;
+        $study = Study::whereSlug($slug)->first();
+        if ($study) {
+            $creations = Creation::whereStudyId($study->id)->latest()->paginate(4);
+        } else {
+            $creations = Creation::latest()->paginate(4);
+        }
+        return view('vote', compact('creations'));
+    }
+
+    public function detail($slug)
+    {
+        $creation = Creation::withCount('vote')->whereSlug($slug)->firstOrFail();
+        return view('detail-karya', compact('creation'));
+    }
+
     public function submitVote()
     {
-        if (!session('nim')) {
-            return redirect()->route('welcome');
-        }
         $user = User::whereNim(session('nim'))->firstOrFail();
 
         // query check apakah sudah memberikan vote pada karya ini

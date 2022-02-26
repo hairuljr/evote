@@ -81,6 +81,11 @@
         @endforelse
       </div>
     </div>
+    <div class="row">
+      <div class="col-full">
+        {{ $creations->withQueryString()->links('components.pagination') }}
+      </div>
+    </div>
   </section>
   <footer class="bg-black text-center py-5">
     <div class="container px-5">

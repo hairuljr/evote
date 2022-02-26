@@ -57,21 +57,25 @@ class UserRepository extends Repository implements MasterRepositoryInterface
   public function generateUser(Request $request)
   {
     $numbers = range(1, $request->numbers);
+
+    // cek user terkahir yang di generate
     $lastGenerated = $this->model->latest('id')
       ->where('nim', 'LIKE', '0' . '%')
       ->pluck('nim')
       ->first();
-    $date = now()->format('d');
-    $hour = now()->format('H');
-    $minute = now()->format('i');
+    $date = now()->format('d'); //tanggal
+    $hour = now()->format('H'); //jam format 24
+    $minute = now()->format('i'); //menit
 
     foreach ($numbers as $value) {
+      // jika ada user yang pernah di generate,
+      // ambil 3 angka terakhir sebagai lanjutan urutan
       if ($lastGenerated) {
         $item = substr($lastGenerated, 7, 3) + $value;
         $format = '0' . $date . $hour . $minute . str_pad($item, 3, '0', STR_PAD_LEFT);
         $request->merge([
           'name' => 'Tamu ' . $item,
-          'email' => Str::slug('Tamu ' . $item) . '@dojoino.com',
+          'email' => Str::slug('Tamu ' . $item) . '@fesma.com',
           'password' => bcrypt('password'),
           'nim' => $format
         ]);
@@ -79,7 +83,7 @@ class UserRepository extends Repository implements MasterRepositoryInterface
         $format = '0' . $date . $hour . $minute . str_pad($value, 3, '0', STR_PAD_LEFT);
         $request->merge([
           'name' => 'Tamu ' . $value,
-          'email' => Str::slug('Tamu ' . $value) . '@dojoino.com',
+          'email' => Str::slug('Tamu ' . $value) . '@fesma.com',
           'password' => bcrypt('password'),
           'nim' => $format
         ]);
